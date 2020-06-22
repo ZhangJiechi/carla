@@ -84,12 +84,18 @@ else
   BOOST_PACKAGE_BASENAME=boost_${BOOST_VERSION//./_}
 
   log "Retrieving boost."
-  wget "https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
+
+# Download boost from source is not stable in China. Download the file to ~/carla/Build first and execute tar.
+#https://sourceforge.net/projects/boost/files/boost/1.72.0/boost_1_72_0.tar.gz/download
+
+# Changed by Zhang Jiechi on 22 Jun 2020.
+
+  #wget "https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
   # try to use the backup boost we have in Jenkins
-  if [[ ! -f "${BOOST_PACKAGE_BASENAME}.tar.gz" ]] ; then
-    log "Using boost backup"
-    wget "https://carla-releases.s3.eu-west-3.amazonaws.com/Backup/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
-  fi
+  #if [[ ! -f "${BOOST_PACKAGE_BASENAME}.tar.gz" ]] ; then
+   # log "Using boost backup"
+   # wget "https://carla-releases.s3.eu-west-3.amazonaws.com/Backup/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
+  #fi
 
   log "Extracting boost for Python 2."
   tar -xzf ${BOOST_PACKAGE_BASENAME}.tar.gz
